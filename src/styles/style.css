@@ -1,0 +1,27 @@
+/* body {
+  display: flex;
+  justify-content: center;
+} */
+
+/* .app-wrapper {
+  min-width: 1024px;
+} */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  background-color: green;
+}
+
+.main-content {
+}
+
+.grid {
+}
+
+/* @media screen and (min-width: 1921px) {
+  .app-wrapper {
+    width: 1920px;
+  }
+} */
