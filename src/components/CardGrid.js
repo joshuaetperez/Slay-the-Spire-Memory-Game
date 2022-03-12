@@ -1,14 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import AllCards from '../card';
-
-// Randomize array in-place using Durstenfeld shuffle algorithm
-// Taken from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
+import AllCards from '../scripts/card';
+import {shuffleArray} from '../scripts/helper';
 
 // Returns a Card which is made up a character's picture and name
 function Card(props) {

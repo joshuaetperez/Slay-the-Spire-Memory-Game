@@ -1,15 +1,7 @@
-// Require all images in the pictures folder
-// The images are mapped to the character name (ex. images['Chosen'])
-function importAll(r) {
-  let images = {};
-  r.keys().forEach((item) => {
-    // The characters "./" and ".webp" are removed from the keys of images object
-    // The character "_" is replaced with a space
-    images[item.replace(/.\/|.webp/g, '').replace(/_/g, ' ')] = r(item);
-  });
-  return images;
-}
-const images = importAll(require.context('./pictures', false));
+import {importPictures, shuffleArray} from './helper';
+
+// images[] contains all the pictures in the picture folder
+const images = importPictures();
 
 // Card factory function
 const Card = (name) => {
@@ -33,13 +25,13 @@ const AllCards = (() => {
 
   // Returns an array of the indices of the initial 10 random unique Cards
   const getInitialCardIndices = () => {
-    const initialCardArr = [];
+    const allCardIndicesArr = [];
     const largestIndex = allCardsArr.length - 1;
-    while (initialCardArr.length < 10) {
-      const index = Math.floor(Math.random() * largestIndex) + 1;
-      if (initialCardArr.indexOf(index) === -1) initialCardArr.push(index);
+    for (let i = 0; i < largestIndex; i++) {
+      allCardIndicesArr[i] = i;
     }
-    return initialCardArr;
+    shuffleArray(allCardIndicesArr);
+    return allCardIndicesArr.slice(0, 10);
   };
 
   const populateArr = () => {
