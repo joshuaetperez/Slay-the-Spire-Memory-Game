@@ -2,9 +2,42 @@ import React, {useState, useEffect} from 'react';
 import CardGrid from './components/CardGrid';
 import './styles/style.css';
 
+// Returns previous prop or state
+// function usePrevious(value) {
+//   const ref = useRef();
+//   useEffect(() => {
+//     ref.current = value;
+//   });
+//   return ref.current;
+// }
+
 function App() {
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
+
+  function handleIncreaseScore() {
+    setScore(score + 1);
+    if (score >= bestScore) {
+      setBestScore(score + 1);
+    }
+  }
+
+  function handleResetScore() {
+    setScore(0);
+  }
+
+  function handleResetGame() {}
+
+  function handleGameWin() {}
+
+  function handleGameLoss() {}
+
+  // useEffect(() => {
+  //   const prevScore = usePrevious(score);
+  //   if (prevScore !== score) {
+
+  //   }
+  // });
 
   return (
     <div className="app-wrapper">
@@ -22,8 +55,10 @@ function App() {
         </div>
       </div>
       <div className="main-content">
-        {/* <img src={images['Chosen']} alt="A pic" height="200" width="150"></img> */}
-        <CardGrid />
+        <CardGrid
+          onIncreaseScore={handleIncreaseScore}
+          onResetScore={handleResetScore}
+        />
       </div>
     </div>
   );

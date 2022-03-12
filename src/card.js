@@ -24,18 +24,20 @@ const AllCards = (() => {
   const allCardsArr = [];
 
   const getArr = () => allCardsArr;
-  const getCard = (name) => {
+  const getCardByName = (name) => {
     return allCardsArr.find((item) => item.getName() === name);
   };
+  const getCardByIndex = (index) => {
+    return allCardsArr[index];
+  };
 
-  // Returns an array of the initial 10 random unique Cards
-  const getInitialCards = () => {
+  // Returns an array of the indices of the initial 10 random unique Cards
+  const getInitialCardIndices = () => {
     const initialCardArr = [];
-    const allCardsArrLength = allCardsArr.length;
+    const largestIndex = allCardsArr.length - 1;
     while (initialCardArr.length < 10) {
-      const index = Math.floor(Math.random() * allCardsArrLength) + 1;
-      if (initialCardArr.indexOf(index) === -1)
-        initialCardArr.push(allCardsArr[index]);
+      const index = Math.floor(Math.random() * largestIndex) + 1;
+      if (initialCardArr.indexOf(index) === -1) initialCardArr.push(index);
     }
     return initialCardArr;
   };
@@ -48,7 +50,7 @@ const AllCards = (() => {
   };
   populateArr();
 
-  return {getArr, getCard, getInitialCards};
+  return {getArr, getCardByName, getCardByIndex, getInitialCardIndices};
 })();
 
 export default AllCards;
