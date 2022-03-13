@@ -7,13 +7,15 @@ function ResultPrompt(props) {
       'You won! You clicked on all unique cards! Click on the button below to set up a new game.';
   } else {
     promptText =
-      'You Lost! You chose a card that you have previously clicked on! Click on the botton below to set up a new game.';
+      'You Lost! You chose a card that you have previously clicked on! Click on the button below to set up a new game.';
   }
 
   return (
     <div className="prompt">
       <div className="prompt-text">{promptText}</div>
-      <button className="replay-button">New Game</button>
+      <button className="replay-button" onClick={props.onResetGame}>
+        New Game
+      </button>
     </div>
   );
 }

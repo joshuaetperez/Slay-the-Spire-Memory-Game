@@ -1,16 +1,39 @@
-import React, {useState, useEffect} from 'react';
-import AllCards from '../scripts/card';
+import React from 'react';
+import AllCards, {
+  ClickedCardIndices,
+  RemainingCardIndices,
+  CurrentCardIndices,
+} from '../scripts/card';
 import {shuffleArray} from '../scripts/helper';
+import Round from '../scripts/round';
+
+const maxScore = AllCards.getArr().length - 1;
 
 // Returns a Card which is made up a character's picture and name
 function Card(props) {
   const card = props.card;
+  const cardIndex = props.cardIndex;
+  const score = props.score;
 
+  // Use in UseEffect?
   function handleClick(e) {
-    // If card has already been clicked, lose the game
-
-    // If card has not been clicked, increase score
-    props.onIncreaseScore();
+    // If card has already been clicked, the game has been lost
+    if (ClickedCardIndices.includesIndex(cardIndex)) {
+      props.onGameLoss();
+    }
+    // Else, increase score, modify index arrays, and check if the game has been won
+    else {
+      props.onIncreaseScore();
+      ClickedCardIndices.insertIndex(cardIndex);
+      RemainingCardIndices.removeIndex(cardIndex);
+      if (Round.increaseRound(score)) {
+        CurrentCardIndices.populateArr();
+        console.log(`Clicked: ${ClickedCardIndices.getArr()}`);
+        console.log(`Remaining: ${RemainingCardIndices.getArr()}`);
+        console.log(`Current: ${CurrentCardIndices.getArr()}`);
+      }
+      if (score === maxScore) props.onGameWin();
+    }
   }
 
   return (
@@ -23,17 +46,20 @@ function Card(props) {
   );
 }
 
-// Returns the 10 initial Cards in a random order
-function InitialBoard(props) {
-  const currentCardIndicesArr = props.currentCardIndicesArr;
+// Returns the 10 Cards featured in the current round
+function Board(props) {
+  const currentCardIndicesArr = CurrentCardIndices.getArr();
   shuffleArray(currentCardIndicesArr);
   return currentCardIndicesArr.map((index) => {
     const card = AllCards.getCardByIndex(index);
     return (
       <Card
         card={card}
+        score={props.score}
         onIncreaseScore={props.onIncreaseScore}
         onResetScore={props.onResetScore}
+        onGameWin={props.onGameWin}
+        onGameLoss={props.onGameLoss}
         cardIndex={index}
         key={index}
       />
@@ -43,26 +69,17 @@ function InitialBoard(props) {
 
 // Returns the current state of the grid of Cards
 function CardGrid(props) {
-  // const [round, setRound] = useState(1);
-  const [currentCardIndicesArr, setCurrentCardIndicesArr] = useState(
-    AllCards.getInitialCardIndices()
-  );
-  // const [clickedCards, setClickedCards] = useState([]);
-  // const [remainingCards, setRemainingCards] = useState([]);
-
-  // const image = AllCards.getCard('Chosen').getImage();
-
-  // Can either have InitialBoard or a new board
   return (
     <div className="grid">
-      <InitialBoard
-        currentCardIndicesArr={currentCardIndicesArr}
+      <Board
+        score={props.score}
         onIncreaseScore={props.onIncreaseScore}
         onResetScore={props.onResetScore}
+        onGameWin={props.onGameWin}
+        onGameLoss={props.onGameLoss}
       />
     </div>
   );
 }
 
 export default CardGrid;
-// export { CardComponent };
