@@ -28,9 +28,6 @@ function Card(props) {
       RemainingCardIndices.removeIndex(cardIndex);
       if (Round.increaseRound(score)) {
         CurrentCardIndices.populateArr();
-        console.log(`Clicked: ${ClickedCardIndices.getArr()}`);
-        console.log(`Remaining: ${RemainingCardIndices.getArr()}`);
-        console.log(`Current: ${CurrentCardIndices.getArr()}`);
       }
       if (score === maxScore) props.onGameWin();
     }

@@ -58,7 +58,8 @@ const RemainingCardIndices = (() => {
 
   const getArr = () => remainingCardIndicesArr;
   const removeIndex = (index) => {
-    remainingCardIndicesArr.splice(index, 1);
+    const arrIndex = remainingCardIndicesArr.indexOf(index);
+    remainingCardIndicesArr.splice(arrIndex, 1);
   };
   const includesIndex = (index) => remainingCardIndicesArr.includes(index);
   const resetArr = () => {
@@ -83,10 +84,11 @@ const CurrentCardIndices = (() => {
   // Resulting array is NOT shuffled
   const populateArr = () => {
     currentCardIndicesArr = [];
-    const clickedCardIndicesArr = ClickedCardIndices.getArr();
-    const remainingCardIndicesArr = RemainingCardIndices.getArr();
+    const clickedCardIndicesArr = ClickedCardIndices.getArr().slice();
+    const remainingCardIndicesArr = RemainingCardIndices.getArr().slice();
     const clickedCardAmount = Round.getClickedCardAmount();
     const remainingCardAmount = Round.getRemainingCardAmount();
+
     shuffleArray(clickedCardIndicesArr);
     shuffleArray(remainingCardIndicesArr);
     for (let i = 0; i < clickedCardAmount; i++) {

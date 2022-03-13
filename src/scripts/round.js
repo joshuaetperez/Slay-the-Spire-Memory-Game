@@ -4,7 +4,7 @@
 const Round = (() => {
   let round = 1;
   const scoreBreakpoints = [9, 19, 27, 35, 41, 47, 52];
-  const cardAmount = [10, 10, 8, 8, 6, 6, 5, 4];
+  const remainingCardAmountArr = [10, 10, 8, 8, 6, 6, 5, 4];
 
   const getRound = () => round;
   const increaseRound = (score) => {
@@ -18,10 +18,10 @@ const Round = (() => {
     round = 1;
   };
   const getClickedCardAmount = () => {
-    return 10 - cardAmount[round - 1];
+    return 10 - remainingCardAmountArr[round - 1];
   };
   const getRemainingCardAmount = () => {
-    return cardAmount[round - 1];
+    return remainingCardAmountArr[round - 1];
   };
 
   return {
