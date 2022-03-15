@@ -1,3 +1,5 @@
+The pictures used in this project were taken from the Slay the Spire Fandom Wiki (https://slay-the-spire.fandom.com/wiki/Slay_the_Spire_Wiki). Slay the Spire is made by Meta Crit (https://www.megacrit.com/).
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

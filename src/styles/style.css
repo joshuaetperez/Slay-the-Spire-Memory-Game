@@ -1,8 +1,14 @@
-/* body {
-} */
+html,
+body,
+#root,
+.app-wrapper {
+  height: 100%;
+}
 
-/* .app-wrapper {
-} */
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+}
 
 img {
   height: 100%;
@@ -14,11 +20,23 @@ img {
   display: flex;
   justify-content: space-between;
   padding: 15px;
-  background-color: green;
+  background-color: #9ca3af;
+  color: #111827;
+  grid: 10px;
 }
 
-/* .main-content {
-} */
+.title {
+  font-size: 1.25rem;
+}
+
+.header-right {
+  font-size: 1.125rem;
+}
+
+.main-content {
+  flex: 1 1 100%;
+  background-color: #1f2937;
+}
 
 .grid {
   display: grid;
@@ -29,12 +47,13 @@ img {
 }
 
 .card {
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  height: 100%;
-  width: 100%;
   border: 1px solid #333;
+  background-color: #f8fafc;
 }
 
 .card-image {
@@ -45,6 +64,26 @@ img {
 
 .card-name {
   text-align: center;
+}
+
+.prompt-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 25px;
+}
+
+.prompt {
+  font-size: 1.5rem;
+  padding: 20px;
+  background-color: #f8fafc;
+}
+
+.replay-button {
+  margin-top: 20px;
 }
 
 @media screen and (max-width: 767px) {
