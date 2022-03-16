@@ -21,12 +21,15 @@ img {
   justify-content: space-between;
   padding: 15px;
   background-color: #9ca3af;
-  color: #111827;
   grid: 10px;
 }
 
 .title {
   font-size: 1.25rem;
+}
+
+.rules {
+  font-size: 1.05rem;
 }
 
 .header-right {
@@ -82,8 +85,37 @@ img {
   background-color: #f8fafc;
 }
 
-.replay-button {
-  margin-top: 20px;
+.normal-difficulty-prompt-text,
+.hard-difficulty-prompt-text {
+  margin-bottom: 20px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.toggle-difficulty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  gap: 5px;
+}
+
+.toggle-difficulty .material-icons {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 5rem;
+  padding: 0;
+}
+
+.normal-difficulty-toggle {
+  color: red;
+}
+
+.hard-difficulty-toggle {
+  color: blue;
 }
 
 @media screen and (max-width: 767px) {

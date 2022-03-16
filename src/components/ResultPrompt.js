@@ -1,4 +1,5 @@
 import React from 'react';
+import DifficultyToggle from './DifficultyToggle';
 
 function ResultPrompt(props) {
   let promptText;
@@ -14,7 +15,11 @@ function ResultPrompt(props) {
     <div className="prompt-container">
       <div className="prompt">
         <div className="prompt-text">{promptText}</div>
-        <button className="replay-button" onClick={props.onResetGame}>
+        <DifficultyToggle
+          difficulty={props.difficulty}
+          onToggleDifficulty={props.onToggleDifficulty}
+        />
+        <button className="play-button" onClick={props.onResetGame}>
           New Game
         </button>
       </div>

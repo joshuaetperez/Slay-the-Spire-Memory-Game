@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import IntroductionPrompt from './components/IntroductionPrompt';
 import CardGrid from './components/CardGrid';
 import ResultPrompt from './components/ResultPrompt';
 import Round from './scripts/round';
@@ -8,11 +9,18 @@ import './styles/style.css';
 function App() {
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
-  // gameResult can be composed of:
+
+  // Possible states for gameResult:
+  // -1: On Introduction prompt
   //  0: Undergoing
   //  1: Won
   //  2: Lost
-  const [gameResult, setGameResult] = useState(0);
+  const [gameResult, setGameResult] = useState(-1);
+
+  // Possible states for difficulty:
+  // 0: Normal
+  // 1: Hard
+  const [difficulty, setDifficulty] = useState(0);
 
   function handleIncreaseScore() {
     if (score === bestScore) {
@@ -27,6 +35,10 @@ function App() {
 
   function handleSetGameResult(resultNum) {
     if (resultNum >= 0 && resultNum <= 3) setGameResult(resultNum);
+  }
+
+  function handleToggleDifficulty() {
+    difficulty === 0 ? setDifficulty(1) : setDifficulty(0);
   }
 
   function handleResetGame() {
@@ -45,7 +57,15 @@ function App() {
   }
 
   function displayMainContent() {
-    if (gameResult === 0) {
+    if (gameResult === -1) {
+      return (
+        <IntroductionPrompt
+          difficulty={difficulty}
+          onToggleDifficulty={handleToggleDifficulty}
+          onResetGame={handleResetGame}
+        />
+      );
+    } else if (gameResult === 0) {
       return (
         <CardGrid
           score={score}
@@ -56,9 +76,23 @@ function App() {
         />
       );
     } else if (gameResult === 1) {
-      return <ResultPrompt hasWonGame={true} onResetGame={handleResetGame} />;
+      return (
+        <ResultPrompt
+          hasWonGame={true}
+          difficulty={difficulty}
+          onToggleDifficulty={handleToggleDifficulty}
+          onResetGame={handleResetGame}
+        />
+      );
     }
-    return <ResultPrompt hasWonGame={false} onResetGame={handleResetGame} />;
+    return (
+      <ResultPrompt
+        hasWonGame={false}
+        difficulty={difficulty}
+        onToggleDifficulty={handleToggleDifficulty}
+        onResetGame={handleResetGame}
+      />
+    );
   }
 
   return (
