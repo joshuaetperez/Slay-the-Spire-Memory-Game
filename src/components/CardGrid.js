@@ -15,7 +15,6 @@ function Card(props) {
   const cardIndex = props.cardIndex;
   const score = props.score;
 
-  // Use in UseEffect?
   function handleClick(e) {
     // If card has already been clicked, the game has been lost
     if (ClickedCardIndices.includesIndex(cardIndex)) {
@@ -23,11 +22,12 @@ function Card(props) {
     }
     // Else, increase score, modify index arrays, and check if the game has been won
     else {
+      const difficulty = props.difficulty;
       props.onIncreaseScore();
       ClickedCardIndices.insertIndex(cardIndex);
       RemainingCardIndices.removeIndex(cardIndex);
-      if (Round.increaseRound(score)) {
-        CurrentCardIndices.populateArr();
+      if (Round.increaseRound(difficulty, score)) {
+        CurrentCardIndices.populateArr(difficulty);
       }
       if (score === maxScore) props.onGameWin();
     }
@@ -47,12 +47,14 @@ function Card(props) {
 function Board(props) {
   const currentCardIndicesArr = CurrentCardIndices.getArr();
   shuffleArray(currentCardIndicesArr);
+  // console.log(currentCardIndicesArr);
   return currentCardIndicesArr.map((index) => {
     const card = AllCards.getCardByIndex(index);
     return (
       <Card
         card={card}
         score={props.score}
+        difficulty={props.difficulty}
         onIncreaseScore={props.onIncreaseScore}
         onResetScore={props.onResetScore}
         onGameWin={props.onGameWin}
@@ -67,14 +69,18 @@ function Board(props) {
 // Returns the current state of the grid of Cards
 function CardGrid(props) {
   return (
-    <div className="grid">
-      <Board
-        score={props.score}
-        onIncreaseScore={props.onIncreaseScore}
-        onResetScore={props.onResetScore}
-        onGameWin={props.onGameWin}
-        onGameLoss={props.onGameLoss}
-      />
+    <div className="grid-container">
+      <div className="round-text">Round {Round.getRound()}</div>
+      <div className="grid">
+        <Board
+          score={props.score}
+          difficulty={props.difficulty}
+          onIncreaseScore={props.onIncreaseScore}
+          onResetScore={props.onResetScore}
+          onGameWin={props.onGameWin}
+          onGameLoss={props.onGameLoss}
+        />
+      </div>
     </div>
   );
 }

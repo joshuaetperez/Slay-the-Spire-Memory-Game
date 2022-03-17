@@ -6,8 +6,8 @@ function IntroductionPrompt(props) {
     'There are two difficulties that can be selected: Normal and Hard. Use the toggle below to select your difficulty.';
   const promptNormalText = (
     <div className="normal-difficulty-prompt-text">
-      In Normal difficulty, the initial number of cards that have to be clicked
-      to advance to the next round will start small and will increase in future
+      In Normal difficulty, the number of cards that have to be clicked to
+      advance to the next round will start small and will increase in future
       rounds. Cards in the previous rounds will{' '}
       <span className="bold">NOT</span> appear in subsequent rounds.
     </div>
@@ -23,7 +23,7 @@ function IntroductionPrompt(props) {
   );
 
   function displayPromptDifficultyText() {
-    if (props.difficulty === 0) {
+    if (props.difficulty === 'Normal') {
       return promptNormalText;
     }
     return promptHardText;

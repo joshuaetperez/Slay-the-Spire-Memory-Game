@@ -2,7 +2,7 @@ import React from 'react';
 
 function DifficultyToggle(props) {
   function displayDifficultyToggle() {
-    if (props.difficulty === 0) {
+    if (props.difficulty === 'Normal') {
       return (
         <button
           className="material-icons normal-difficulty-toggle"

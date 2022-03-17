@@ -79,15 +79,16 @@ const CurrentCardIndices = (() => {
 
   const getArr = () => currentCardIndicesArr;
 
-  // Populates currentCardIndicesArr with a ratio of indices from remainingCardIndicesArr and clickedCardIndicesArr
-  // Ratio depends on the current round
   // Resulting array is NOT shuffled
-  const populateArr = () => {
+  const populateArr = (difficulty) => {
     currentCardIndicesArr = [];
     const clickedCardIndicesArr = ClickedCardIndices.getArr().slice();
     const remainingCardIndicesArr = RemainingCardIndices.getArr().slice();
-    const clickedCardAmount = Round.getClickedCardAmount();
-    const remainingCardAmount = Round.getRemainingCardAmount();
+
+    // On Easy difficulty, currentCardIndicesArr is populated only using the indices from remainingCardIndicesArr, the amount of which varies depending on the round
+    // On Hard difficulty, currentCardIndicesArr is populated with a ratio of indices from remainingCardIndicesArr and clickedCardIndicesArr
+    const clickedCardAmount = Round.getClickedCardAmount(difficulty);
+    const remainingCardAmount = Round.getRemainingCardAmount(difficulty);
 
     shuffleArray(clickedCardIndicesArr);
     shuffleArray(remainingCardIndicesArr);
@@ -99,14 +100,14 @@ const CurrentCardIndices = (() => {
     }
   };
 
-  populateArr();
+  populateArr('Normal');
   return {getArr, populateArr};
 })();
 
-const resetAllIndexArrays = () => {
+const resetAllIndexArrays = (difficulty) => {
   ClickedCardIndices.resetArr();
   RemainingCardIndices.resetArr();
-  CurrentCardIndices.populateArr();
+  CurrentCardIndices.populateArr(difficulty);
 };
 
 export default AllCards;

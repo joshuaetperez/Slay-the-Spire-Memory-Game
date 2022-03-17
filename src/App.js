@@ -18,9 +18,9 @@ function App() {
   const [gameResult, setGameResult] = useState(-1);
 
   // Possible states for difficulty:
-  // 0: Normal
-  // 1: Hard
-  const [difficulty, setDifficulty] = useState(0);
+  // "Normal": Normal
+  // "Hard": Hard
+  const [difficulty, setDifficulty] = useState('Normal');
 
   function handleIncreaseScore() {
     if (score === bestScore) {
@@ -38,14 +38,14 @@ function App() {
   }
 
   function handleToggleDifficulty() {
-    difficulty === 0 ? setDifficulty(1) : setDifficulty(0);
+    difficulty === 'Normal' ? setDifficulty('Hard') : setDifficulty('Normal');
   }
 
   function handleResetGame() {
     handleSetGameResult(0);
     handleResetScore();
     Round.resetRound();
-    resetAllIndexArrays();
+    resetAllIndexArrays(difficulty);
   }
 
   function handleGameWin() {
@@ -69,6 +69,7 @@ function App() {
       return (
         <CardGrid
           score={score}
+          difficulty={difficulty}
           onIncreaseScore={handleIncreaseScore}
           onResetScore={handleResetScore}
           onGameWin={handleGameWin}
