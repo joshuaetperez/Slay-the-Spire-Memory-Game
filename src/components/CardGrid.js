@@ -4,7 +4,7 @@ import AllCards, {
   RemainingCardIndices,
   CurrentCardIndices,
 } from '../scripts/card';
-import {shuffleArray} from '../scripts/helper';
+import {shuffleArray, setGridLayout} from '../scripts/helper';
 import Round from '../scripts/round';
 
 const maxScore = AllCards.getArr().length - 1;
@@ -43,27 +43,32 @@ function Card(props) {
   );
 }
 
-// Returns the 10 Cards featured in the current round
+// Returns the Cards featured in the current round
 function Board(props) {
   const currentCardIndicesArr = CurrentCardIndices.getArr();
   shuffleArray(currentCardIndicesArr);
   // console.log(currentCardIndicesArr);
-  return currentCardIndicesArr.map((index) => {
-    const card = AllCards.getCardByIndex(index);
-    return (
-      <Card
-        card={card}
-        score={props.score}
-        difficulty={props.difficulty}
-        onIncreaseScore={props.onIncreaseScore}
-        onResetScore={props.onResetScore}
-        onGameWin={props.onGameWin}
-        onGameLoss={props.onGameLoss}
-        cardIndex={index}
-        key={index}
-      />
-    );
-  });
+  const gridClass = setGridLayout(currentCardIndicesArr.length);
+  return (
+    <div className={gridClass}>
+      {currentCardIndicesArr.map((index) => {
+        const card = AllCards.getCardByIndex(index);
+        return (
+          <Card
+            card={card}
+            score={props.score}
+            difficulty={props.difficulty}
+            onIncreaseScore={props.onIncreaseScore}
+            onResetScore={props.onResetScore}
+            onGameWin={props.onGameWin}
+            onGameLoss={props.onGameLoss}
+            cardIndex={index}
+            key={index}
+          />
+        );
+      })}
+    </div>
+  );
 }
 
 // Returns the current state of the grid of Cards
@@ -71,16 +76,14 @@ function CardGrid(props) {
   return (
     <div className="grid-container">
       <div className="round-text">Round {Round.getRound()}</div>
-      <div className="grid">
-        <Board
-          score={props.score}
-          difficulty={props.difficulty}
-          onIncreaseScore={props.onIncreaseScore}
-          onResetScore={props.onResetScore}
-          onGameWin={props.onGameWin}
-          onGameLoss={props.onGameLoss}
-        />
-      </div>
+      <Board
+        score={props.score}
+        difficulty={props.difficulty}
+        onIncreaseScore={props.onIncreaseScore}
+        onResetScore={props.onResetScore}
+        onGameWin={props.onGameWin}
+        onGameLoss={props.onGameLoss}
+      />
     </div>
   );
 }
