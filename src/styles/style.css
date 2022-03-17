@@ -1,8 +1,17 @@
+* {
+  box-sizing: border-box;
+}
+
 html,
 body,
 #root,
 .app-wrapper {
   height: 100%;
+}
+
+#root {
+  --card-ideal-width: 300px;
+  --grid-gap: 10px;
 }
 
 .app-wrapper {
@@ -52,23 +61,36 @@ img {
   display: grid;
   grid-auto-rows: 1fr;
   padding: 10px;
-  gap: 10px;
+  gap: var(--grid-gap);
+  justify-content: center;
 }
 
 .grid-3 {
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(
+    3,
+    clamp(0px, var(--card-ideal-width), calc(calc(100% / 3) - var(--grid-gap)))
+  );
 }
 
 .grid-4 {
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(
+    4,
+    clamp(0px, var(--card-ideal-width), calc(25% - calc(4 * var(--grid-gap))))
+  );
 }
 
 .grid-5 {
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(
+    5,
+    clamp(0px, var(--card-ideal-width), calc(20% - var(--grid-gap)))
+  );
 }
 
 .grid-6 {
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(
+    6,
+    clamp(0px, var(--card-ideal-width), calc(calc(100% / 6) - var(--grid-gap)))
+  );
 }
 
 .card {
@@ -79,6 +101,20 @@ img {
   justify-content: flex-end;
   border: 1px solid #333;
   background-color: #f8fafc;
+}
+
+/* .pop {
+  animation: pop 1s linear 1;
+} */
+
+/* .pop:hover {
+  animation: pop 0.3s linear 1;
+} */
+
+@keyframes pop {
+  50% {
+    color: #1f2937;
+  }
 }
 
 .card-image {
@@ -102,6 +138,7 @@ img {
 }
 
 .prompt {
+  width: clamp(50%, 80%, 1000px);
   font-size: 1.5rem;
   padding: 20px;
   background-color: #f8fafc;

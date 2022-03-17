@@ -3,7 +3,7 @@ import DifficultyToggle from './DifficultyToggle';
 
 function IntroductionPrompt(props) {
   const promptText =
-    'There are two difficulties that can be selected: Normal and Hard. Use the toggle below to select your difficulty.';
+    'There are two difficulties that can be selected: Normal and Hard. In both difficulties, the goal is to click on all cards only once. Use the toggle below to select your difficulty.';
   const promptNormalText = (
     <div className="normal-difficulty-prompt-text">
       In Normal difficulty, the number of cards that have to be clicked to

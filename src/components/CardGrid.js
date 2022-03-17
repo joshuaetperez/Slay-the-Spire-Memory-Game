@@ -47,7 +47,6 @@ function Card(props) {
 function Board(props) {
   const currentCardIndicesArr = CurrentCardIndices.getArr();
   shuffleArray(currentCardIndicesArr);
-  // console.log(currentCardIndicesArr);
   const gridClass = setGridLayout(currentCardIndicesArr.length);
   return (
     <div className={gridClass}>
