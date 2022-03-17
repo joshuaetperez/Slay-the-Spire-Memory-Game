@@ -101,19 +101,19 @@ img {
   justify-content: flex-end;
   border: 1px solid #333;
   background-color: #f8fafc;
+  animation: pop 300ms linear 1;
+  cursor: pointer;
 }
 
-/* .pop {
-  animation: pop 1s linear 1;
-} */
-
-/* .pop:hover {
-  animation: pop 0.3s linear 1;
-} */
-
 @keyframes pop {
+  25% {
+    transform: scale(0.97);
+  }
   50% {
-    color: #1f2937;
+    transform: scale(0.98);
+  }
+  75% {
+    transform: scale(0.99);
   }
 }
 

@@ -6,19 +6,19 @@ function IntroductionPrompt(props) {
     'There are two difficulties that can be selected: Normal and Hard. In both difficulties, the goal is to click on all cards only once. Use the toggle below to select your difficulty.';
   const promptNormalText = (
     <div className="normal-difficulty-prompt-text">
-      In Normal difficulty, the number of cards that have to be clicked to
-      advance to the next round will start small and will increase in future
-      rounds. Cards in the previous rounds will{' '}
+      In <span className="bold">Normal</span> difficulty, the number of cards
+      that have to be clicked to advance to the next round will start small and
+      will increase in future rounds. Cards in the previous rounds will{' '}
       <span className="bold">NOT</span> appear in subsequent rounds.
     </div>
   );
   const promptHardText = (
     <div className="hard-difficulty-prompt-text">
-      In Hard difficulty, the number of cards shown each round will always be{' '}
-      <span className="bold">10</span>. Cards in the previous rounds{' '}
-      <span className="bold">WILL</span> appear in subsequent rounds starting on
-      the third round, and the number of such cards will increase in future
-      rounds.
+      In <span className="bold">Hard</span> difficulty, the number of cards
+      shown each round will always be <span className="bold">10</span>. Cards in
+      the previous rounds <span className="bold">WILL</span> appear in
+      subsequent rounds starting on the third round, and the number of such
+      cards will increase in future rounds.
     </div>
   );
 

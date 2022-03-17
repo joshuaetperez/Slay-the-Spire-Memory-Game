@@ -6,6 +6,7 @@ import AllCards, {
 } from '../scripts/card';
 import {shuffleArray, setGridLayout} from '../scripts/helper';
 import Round from '../scripts/round';
+import {v4 as uuidv4} from 'uuid';
 
 const maxScore = AllCards.getArr().length - 1;
 
@@ -62,7 +63,7 @@ function Board(props) {
             onGameWin={props.onGameWin}
             onGameLoss={props.onGameLoss}
             cardIndex={index}
-            key={index}
+            key={uuidv4()}
           />
         );
       })}
