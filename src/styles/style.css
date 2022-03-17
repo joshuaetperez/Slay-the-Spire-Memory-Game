@@ -144,8 +144,14 @@ img {
   background-color: #f8fafc;
 }
 
+.result-text {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
 .normal-difficulty-prompt-text,
-.hard-difficulty-prompt-text {
+.hard-difficulty-prompt-text,
+.result-text {
   margin-bottom: 20px;
 }
 
