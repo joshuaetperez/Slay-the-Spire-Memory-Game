@@ -22,9 +22,7 @@ function shuffleArray(array) {
 
 // Returns a className that Sets grid layout based on number of Cards on the Board
 function setGridLayout(arrayLength) {
-  if (arrayLength % 6 === 0) {
-    return 'grid grid-6';
-  } else if (arrayLength % 5 === 0 || arrayLength % 9 === 0) {
+  if (arrayLength % 5 === 0 || arrayLength % 9 === 0) {
     return 'grid grid-5';
   } else if (arrayLength % 4 === 0) {
     return 'grid grid-4';
